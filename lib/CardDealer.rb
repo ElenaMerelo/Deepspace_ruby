@@ -75,6 +75,7 @@ class CardDealer
         @suppliesPackages.add(SuppliesPackage.new(3,50,3))  
         @suppliesPackages.add(SuppliesPackage.new(40,100,40))
         @suppliesPackages.add(SuppliesPackage.new(100,100,100))
+        @suppliesPackages.add(SuppliesPackage.new(200,200,200)) #Paquete añadido
     end
     
     def createWeapons() 
@@ -102,7 +103,9 @@ class CardDealer
        @weapons.add(Weapon.new("Cañón ACME",WeaponType::PLASMA,1)) 
        @weapons.add(Weapon.new("Cañón ACME",WeaponType::PLASMA,1)) 
        @weapons.add(Weapon.new("Cañón ACME",WeaponType::PLASMA,1)) 
-       @weapons.add(Weapon.new("Cañón mejorado",WeaponType::PLASMA,2))       
+       @weapons.add(Weapon.new("Cañón mejorado",WeaponType::PLASMA,2))   
+       @weapons.add(Weapon.new("Cañón estupendo",WeaponType::PLASMA,70)) #Arma añadida
+       
        
     end
     
@@ -118,6 +121,7 @@ class CardDealer
        @shieldBoosters.add(ShieldBooster.new("Escudo ACME",1.5,2))
        @shieldBoosters.add(ShieldBooster.new("Escudo normal",3.0,2))
        @shieldBoosters.add(ShieldBooster.new("Escudo normal",4.0,2))
+       @shieldBoosters.add(ShieldBooster.new("Escudo estupendo",8.0,7)) #Escudo añadido
     end
                                
     def createHangars() 
@@ -130,6 +134,7 @@ class CardDealer
         @hangars.add(Hangar.new(2))
         @hangars.add(Hangar.new(1))
         @hangars.add(Hangar.new(1))
+        @hangars.add(Hangar.new(10)) #Hangar añadido
     end
     
     def createEnemies() 
