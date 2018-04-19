@@ -160,7 +160,7 @@ class SpaceStation
     def receiveShot(shot)
       myProtection = protection
       if(myProtection >= shot)
-        @shieldPower -= @@SHIELDLOSSPERUNITSHOOT * shot
+        @shieldPower -= @@SHIELDLOSSPERUNITSHOT * shot
         @shieldPower = [0.0,@shieldPower].max
         return ShotResult::RESIST
       else
