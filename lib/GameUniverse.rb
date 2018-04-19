@@ -174,7 +174,7 @@ class GameUniverse
   
   
   def to_s
-      return "\nIndex: #{@currentStationIndex} + Turns: #{@turns}"
+      return "\nIndex: #{@currentStationIndex} + Turns: #{@turns} + SpaceStations: #{@spaceStations} + CurrenStation: #{@currentStation} + CurrentEnemy: #{@currentEnemy}"
    end
 
 end

@@ -2,6 +2,7 @@
 
 require_relative 'SpaceStationToUI'
 require_relative 'ShotResult'
+require_relative 'CardDealer'
 
 module Deepspace
 
