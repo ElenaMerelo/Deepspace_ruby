@@ -8,6 +8,7 @@ require_relative 'EnemyStarShip'
 require_relative 'Damage'
 require_relative 'Dice'
 require_relative 'GameUniverse'
+require_relative 'SpaceStationToUI'
 require 'pp'
 
 module ExamenP3
@@ -17,6 +18,14 @@ class Test3
     s1 = Deepspace::SuppliesPackage.new(5,5,5)
     pp s1
     station1 = Deepspace::SpaceStation.new("estacion1",s1)
+    
+    pp station1
+    
+    puts "Imprimimos la nave con ayuda de SpaceStationToUI\n"
+    
+    spaceUI = Deepspace::SpaceStationToUI.new(station1)
+    puts "#{spaceUI}"
+    
     
     dice = Deepspace::Dice.new
     contador = [0,0,0]
