@@ -10,6 +10,7 @@ class Dice
     @NSHIELDSPROB = 0.25
     @NWEAPONSPROB = 0.33
     @FIRSTSHOTPROB = 0.5
+    @EXTRAEFFICIENCY=0.8;
     
   end
   
@@ -55,6 +56,15 @@ class Dice
   
   def spaceStationMoves(speed)
     @generator.rand(1.0) <= speed
+  end
+  
+  def extraEfficiency
+    if @generator.rand(1.0) <= @EXTRAEFFICIENCY
+      return true
+    else
+      return false
+    end
+    
   end
   
   def to_s

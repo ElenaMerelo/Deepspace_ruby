@@ -3,6 +3,7 @@
 require_relative 'SpaceStationToUI'
 require_relative 'ShotResult'
 require_relative 'CardDealer'
+require_relative 'Transformation'
 
 module Deepspace
 
@@ -22,6 +23,23 @@ class SpaceStation
     @shieldBoosters = []
     @pendingDamage = nil
     @nMedals = 0
+  end
+  
+  def self.newCopy(s)
+    @name = s.name
+    @ammoPower = s.ammoPower
+    @fuelUnits = s.fuelUnits
+    @shieldPower = s.shieldPower
+    @hangar = s.hangar
+    for i in 0...s.weapons.length
+      @weapons.push(s.weapons[i])
+    end
+    for i in 0...s.shieldBoosters.length
+      @shieldBoosters.push(s.shieldBoosters[i])
+    end
+    @pendingDamage = s.pendingDamage
+    @nMedals = s.nMedals
+    
   end
 
   def getUIversion
@@ -198,6 +216,16 @@ class SpaceStation
 
       medals = loot.nMedals
       @nMedals += medals
+      
+      if loot.efficient
+        return Transformation::GETEFFICIENT
+      else if loot.spaceCity
+            return Transformation::SPACECITY
+      else
+        return Transformation::NOTRANSFORM
+      end
+      end
+      
     end
 
 
@@ -246,3 +274,4 @@ class SpaceStation
 
 end
 end
+

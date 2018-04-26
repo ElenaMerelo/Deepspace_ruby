@@ -56,7 +56,14 @@ class TextUI
             when DS::CombatResult::STATIONESCAPES 
               pause("\n Has logrado escapar. Eres una Gallina Espacial.")
             when DS::CombatResult::STATIONWINS 
-              pause("\n Has GANADO el combate. Disfruta de tu botín.")
+              cout = "\n Has GANADO el combate. Disfruta de tu botín."
+              if(@gameUI.currentEnemy.loot.efficient)
+                cout += " ¡Tu estacion espacial es ahora más eficiente! "
+              else if (@gameUI.currentEnemy.loot.spaceCity)
+                  cout += " ¡Has creado una ciudad espacial!"
+              end
+              end
+              pause(cout)
               if(@controller.haveAWinner()) then
                 pause("\n\n **** **** ****  HAS GANADO LA PARTIDA  **** **** ****\n")
                 exit(0)

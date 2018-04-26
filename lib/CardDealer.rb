@@ -9,12 +9,12 @@ require_relative 'WeaponType'
 require_relative 'ShieldBooster'
 require_relative 'Hangar'
 require_relative 'Loot'
-require_relative 'Damage'
+require_relative 'NumericDamage'
+require_relative 'SpecificDamage'
 require_relative 'EnemyStarShip'
 
 module Deepspace
 
-# 2.3.17 - Translatio from Java
 # @author Profesor
     
 class CardDealer 
@@ -75,7 +75,6 @@ class CardDealer
         @suppliesPackages.add(SuppliesPackage.new(3,50,3))  
         @suppliesPackages.add(SuppliesPackage.new(40,100,40))
         @suppliesPackages.add(SuppliesPackage.new(100,100,100))
-        @suppliesPackages.add(SuppliesPackage.new(200,200,200)) #Paquete añadido
     end
     
     def createWeapons() 
@@ -103,9 +102,7 @@ class CardDealer
        @weapons.add(Weapon.new("Cañón ACME",WeaponType::PLASMA,1)) 
        @weapons.add(Weapon.new("Cañón ACME",WeaponType::PLASMA,1)) 
        @weapons.add(Weapon.new("Cañón ACME",WeaponType::PLASMA,1)) 
-       @weapons.add(Weapon.new("Cañón mejorado",WeaponType::PLASMA,2))   
-       @weapons.add(Weapon.new("Cañón estupendo",WeaponType::PLASMA,70)) #Arma añadida
-       
+       @weapons.add(Weapon.new("Cañón mejorado",WeaponType::PLASMA,2))       
        
     end
     
@@ -121,7 +118,6 @@ class CardDealer
        @shieldBoosters.add(ShieldBooster.new("Escudo ACME",1.5,2))
        @shieldBoosters.add(ShieldBooster.new("Escudo normal",3.0,2))
        @shieldBoosters.add(ShieldBooster.new("Escudo normal",4.0,2))
-       @shieldBoosters.add(ShieldBooster.new("Escudo estupendo",8.0,7)) #Escudo añadido
     end
                                
     def createHangars() 
@@ -134,29 +130,28 @@ class CardDealer
         @hangars.add(Hangar.new(2))
         @hangars.add(Hangar.new(1))
         @hangars.add(Hangar.new(1))
-        @hangars.add(Hangar.new(10)) #Hangar añadido
     end
     
     def createEnemies() 
-        regularLoot0=Loot.new(1,2,1,1,1)
-        regularLoot1=Loot.new(1,1,2,1,1)
-        badLoot=Loot.new(1,1,1,0,1)
-        goodLoot=Loot.new(2,2,2,1,2)
+        regularLoot0=Loot.newL(1,2,1,1,1)
+        regularLoot1=Loot.newL(1,1,2,1,1)
+        badLoot=Loot.newL(1,1,1,0,1)
+        goodLoot=Loot.newL(2,2,2,1,2)
         
-        regularDamage0=Damage.newNumericWeapons(2,1) 
-        regularDamage1=Damage.newNumericWeapons(1,1) 
-        lowDamage0=Damage.newNumericWeapons(1,1)
-        lowDamage1=Damage.newNumericWeapons(0,1)
-        lowDamage2=Damage.newNumericWeapons(1,0)
+        regularDamage0=NumericDamage.new(2,1) 
+        regularDamage1=NumericDamage.new(1,1) 
+        lowDamage0=NumericDamage.new(1,1)
+        lowDamage1=NumericDamage.new(0,1)
+        lowDamage2=NumericDamage.new(1,0)
         
-        regularSpecificDamage0=Damage.newSpecificWeapons([WeaponType::LASER,WeaponType::MISSILE,WeaponType::PLASMA],1)
-        hardSpecificDamage0=Damage.newSpecificWeapons([WeaponType::LASER,WeaponType::LASER,WeaponType::LASER, \
+        regularSpecificDamage0=SpecificDamage.new([WeaponType::LASER,WeaponType::MISSILE,WeaponType::PLASMA],1)
+        hardSpecificDamage0=SpecificDamage.new([WeaponType::LASER,WeaponType::LASER,WeaponType::LASER, \
                                         WeaponType::MISSILE,WeaponType::MISSILE,WeaponType::MISSILE, \
                                         WeaponType::PLASMA,WeaponType::PLASMA,WeaponType::PLASMA],2)    
-        softSpecificDamage0=Damage.newSpecificWeapons([WeaponType::LASER],1)  
-        softSpecificDamage1=Damage.newSpecificWeapons([WeaponType::MISSILE],1)  
-        softSpecificDamage2=Damage.newSpecificWeapons([WeaponType::PLASMA],1)  
-        mediumSpecificDamage0=Damage.newSpecificWeapons([WeaponType::LASER,WeaponType::MISSILE],2)  
+        softSpecificDamage0=SpecificDamage.new([WeaponType::LASER],1)  
+        softSpecificDamage1=SpecificDamage.new([WeaponType::MISSILE],1)  
+        softSpecificDamage2=SpecificDamage.new([WeaponType::PLASMA],1)  
+        mediumSpecificDamage0=SpecificDamage.new([WeaponType::LASER,WeaponType::MISSILE],2)  
         
         @enemies.add(EnemyStarShip.new("Enemigo fácil -1",0,0,regularLoot0,lowDamage0));
         @enemies.add(EnemyStarShip.new("Enemigo fácil -1",0,10,badLoot,lowDamage0));
@@ -185,7 +180,15 @@ class CardDealer
         @enemies.add(EnemyStarShip.new("Enemigo difícil 0",200,100,goodLoot,hardSpecificDamage0));          
         @enemies.add(EnemyStarShip.new("Enemigo difícil 1",100,200,goodLoot,hardSpecificDamage0));   
         
-        @enemies.add(EnemyStarShip.new("Enemigo imposible",500,500,goodLoot,hardSpecificDamage0));              
+        @enemies.add(EnemyStarShip.new("Enemigo imposible",500,500,goodLoot,hardSpecificDamage0));   
+        
+        # Enemigos que transforman
+        
+        transformLoot0=Loot.new(1,1,1,0,1,true,false)
+        transformLoot1=Loot.new(1,1,1,0,1,false,true)
+        
+        @enemies.add(EnemyStarShip.new("Enemigo transforma 0",200,100,transformLoot0,regularDamage0))
+        @enemies.add(EnemyStarShip.new("Enemigo transforma 1",100,200,transformLoot1,regularDamage1))
     end
 end # class
 

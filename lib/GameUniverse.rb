@@ -20,6 +20,7 @@ class GameUniverse
     @currentEnemy =  nil
     @spaceStations = []
     @currentStation = nil
+    @haveSpaceCity = false
   end
   
   def state
@@ -87,7 +88,7 @@ class GameUniverse
           nh = @dice.initWithNHangars
           nw = @dice.initWithNWeapons
           ns = @dice.initWithShields
-          l = Loot.new(0, nw, ns, nh, 0)
+          l = Loot.newL(0, nw, ns, nh, 0)
           station.setLoot(l)
           @spaceStations.push(station)
         end
@@ -163,7 +164,13 @@ class GameUniverse
         end
       else
         aLoot = enemy.loot
-        station.setLoot(aLoot)
+        r = station.setLoot(aLoot)
+        if r == Transformation::GETEFFICIENT
+          makeStationEfficient
+        else if r == Transformation::SPACECITY
+           createSpaceCity
+        end
+        end
         combatResult = CombatResult::STATIONWINS
       end
 
@@ -171,6 +178,21 @@ class GameUniverse
 
       return combatResult
   end
+  
+  def createSpaceCity
+    if (!@haveSpaceCity)
+      @currentStation = SpaceCity.new(@currentStation, @spaceStations)
+    end
+  end
+  
+  def makeStationEfficient
+    if(@dice.extraEfficiency)
+      @currentStation = BetaPowerEfficientSpaceStation.new(@currentStation)
+    else
+      @currentStation = PowerEfficientSpaceStation.new(@currentStation)
+    end
+  end
+  
   
   
   def to_s
