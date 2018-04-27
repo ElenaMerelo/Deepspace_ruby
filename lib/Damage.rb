@@ -11,8 +11,8 @@ class Damage
     @nShields=nshields
   end
   
-  def self.newCopy(copy)
-    new(copy.nShields)
+  def copy
+    return "This isnt implemented yet"
   end
   
  def getUIversion
