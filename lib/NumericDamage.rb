@@ -29,6 +29,10 @@ class NumericDamage < Damage
     @nWeapons -= 1
   end
   
+  def copy
+    return new(@nWeapons,@nShields)
+  end
+  
   def to_s
     return super + "\nnWeapons: #{@nWeapons}"
   end
