@@ -6,7 +6,7 @@ require_relative "Damage"
 require_relative "SpecificDamageToUI"
 module Deepspace
 class SpecificDamage < Damage
-  
+  public_class_method :new
   attr_reader :weapons
   
   def initialize(weapons, nShields)
