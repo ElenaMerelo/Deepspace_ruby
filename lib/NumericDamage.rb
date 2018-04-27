@@ -8,6 +8,7 @@ require_relative "NumericDamageToUI"
 module Deepspace
 
 class NumericDamage < Damage
+  public_class_method :new
   
   attr_reader :nWeapons
   
