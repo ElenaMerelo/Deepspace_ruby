@@ -37,6 +37,11 @@ class SpecificDamage < Damage
     end
   end
   
+  def copy
+      return new(Array.new(@weapons),@nShields);
+    end
+    
+  
   
   def to_s
       super + "\nweapons: #{@weapons}"
