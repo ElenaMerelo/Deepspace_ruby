@@ -88,7 +88,7 @@ class GameUniverse
           nh = @dice.initWithNHangars
           nw = @dice.initWithNWeapons
           ns = @dice.initWithShields
-          l = Loot.newL(0, nw, ns, nh, 0)
+          l = Loot.new(0, nw, ns, nh, 0)
           station.setLoot(l)
           @spaceStations.push(station)
         end
