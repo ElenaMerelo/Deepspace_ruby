@@ -5,6 +5,9 @@ require_relative 'GameStateController'
 require_relative 'SpaceStation'
 require_relative 'CombatResult'
 require_relative 'CardDealer'
+require_relative 'SpaceCity'
+require_relative 'BetaPowerEfficientSpaceStation'
+require_relative 'PowerEfficientSpaceStation'
 
 module Deepspace
 class GameUniverse
@@ -84,11 +87,11 @@ class GameUniverse
 
         for i in 1..names.length
           supplies = dealer.nextSuppliesPackage
-          station = SpaceStation.new(names[i-1], supplies)
+          station = SpaceStation.newStation(names[i-1], supplies)
           nh = @dice.initWithNHangars
           nw = @dice.initWithNWeapons
           ns = @dice.initWithShields
-          l = Loot.newL(0, nw, ns, nh, 0)
+          l = Loot.new(0, nw, ns, nh, 0)
           station.setLoot(l)
           @spaceStations.push(station)
         end
@@ -167,11 +170,14 @@ class GameUniverse
         r = station.setLoot(aLoot)
         if r == Transformation::GETEFFICIENT
           makeStationEfficient
+          combatResult = CombatResult::STATIONWINSANDCONVERTS
         else if r == Transformation::SPACECITY
            createSpaceCity
+           combatResult = CombatResult::STATIONWINSANDCONVERTS
+        else 
+         combatResult = CombatResult::STATIONWINS
         end
         end
-        combatResult = CombatResult::STATIONWINS
       end
 
       @gameState.next(@turns, @spaceStations.size)
@@ -182,6 +188,7 @@ class GameUniverse
   def createSpaceCity
     if (!@haveSpaceCity)
       @currentStation = SpaceCity.new(@currentStation, @spaceStations)
+      @spaceStations[@currentStationIndex] = @currentStation
     end
   end
   
@@ -191,6 +198,7 @@ class GameUniverse
     else
       @currentStation = PowerEfficientSpaceStation.new(@currentStation)
     end
+    @spaceStations[@currentStationIndex] = @currentStation
   end
   
   

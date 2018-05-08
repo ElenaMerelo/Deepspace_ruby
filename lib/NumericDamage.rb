@@ -8,6 +8,7 @@ require_relative "NumericDamageToUI"
 module Deepspace
 
 class NumericDamage < Damage
+  public_class_method :new
   
   attr_reader :nWeapons
   
@@ -21,11 +22,19 @@ class NumericDamage < Damage
   end
   
   def adjust(w,s)
-    NumericDamage.new([@nWeapons,w.length].min, [@nShields,s.length].min)
+    NumericDamage.new([@nWeapons,w.length].min, super)
   end
   
   def discardWeapon(w)
     @nWeapons -= 1
+  end
+  
+  def copy
+    NumericDamage.new(@nWeapons,@nShields)
+  end
+  
+  def hasNoEffect
+    @nWeapons == 0 && super
   end
   
   def to_s

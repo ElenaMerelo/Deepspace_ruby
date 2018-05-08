@@ -6,7 +6,7 @@ require_relative "Damage"
 require_relative "SpecificDamageToUI"
 module Deepspace
 class SpecificDamage < Damage
-  
+  public_class_method :new
   attr_reader :weapons
   
   def initialize(weapons, nShields)
@@ -27,7 +27,7 @@ class SpecificDamage < Damage
           aux.push(aux[i])
         end
       end
-      SpecificDamage.new(aux, [@nShields,s.length].min) 
+      SpecificDamage.new(aux, adjustShields(s)) 
   end
   
   def discardWeapon(w)
@@ -37,6 +37,17 @@ class SpecificDamage < Damage
     end
   end
   
+  def copy
+      SpecificDamage.new(Array.new(@weapons),@nShields)
+    end
+    
+  def hasNoEffect
+    @eapons.size == 0 && super
+  end
+  
+  def getUIversion
+    SpecificDamageToUI.new(self)
+  end
   
   def to_s
       super + "\nweapons: #{@weapons}"

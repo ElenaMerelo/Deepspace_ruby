@@ -13,33 +13,24 @@ class SpaceStation
 
   attr_reader :ammoPower, :fuelUnits, :name, :nMedals, :shieldPower, :hangar, :weapons, :shieldBoosters, :pendingDamage
 
-  def initialize(n,s)
+  def initialize(n,ap,fu,sp,h=nil,w=[],sb=[],pd=nil,m=0)
     @name = n
-    @ammoPower = s.ammoPower
-    @fuelUnits = s.fuelUnits
-    @shieldPower = s.shieldPower
-    @hangar = nil
-    @weapons = []
-    @shieldBoosters = []
-    @pendingDamage = nil
-    @nMedals = 0
+    @ammoPower = ap
+    @fuelUnits = fu
+    @shieldPower = sp
+    @hangar = h
+    @weapons = w
+    @shieldBoosters = sb
+    @pendingDamage = pd
+    @nMedals = m
   end
   
+  def self.newStation(n,s)
+    new(n,s.ammoPower,s.fuelUnits,s.shieldPower)
+  end
   def self.newCopy(s)
-    @name = s.name
-    @ammoPower = s.ammoPower
-    @fuelUnits = s.fuelUnits
-    @shieldPower = s.shieldPower
-    @hangar = s.hangar
-    for i in 0...s.weapons.length
-      @weapons.push(s.weapons[i])
-    end
-    for i in 0...s.shieldBoosters.length
-      @shieldBoosters.push(s.shieldBoosters[i])
-    end
-    @pendingDamage = s.pendingDamage
-    @nMedals = s.nMedals
-    
+    new(s.name, s.ammoPower, s.fuelUnits, s.shieldPower, s.hangar, s.weapons,s.shieldBoosters, \
+    s.pendingDamage,s.nMedals)
   end
 
   def getUIversion

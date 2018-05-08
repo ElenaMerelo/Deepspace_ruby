@@ -12,7 +12,8 @@ class SpaceCity < SpaceStation
   def initialize(base, rest)
     @base = base
     @collaborators = rest
-    newCopy(base)    
+    super(base.name, base.ammoPower, base.fuelUnits, base.shieldPower, \
+        base.hangar, base.weapons,base.shieldBoosters, base.pendingDamage,base.nMedals) 
   end
   
   def fire

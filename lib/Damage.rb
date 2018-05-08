@@ -11,8 +11,8 @@ class Damage
     @nShields=nshields
   end
   
-  def self.newCopy(copy)
-    new(copy.nShields)
+  def copy
+    return "This isnt implemented yet"
   end
   
  def getUIversion
@@ -23,6 +23,10 @@ class Damage
     if @nShields > 0
       @nShields -= 1
     end
+  end
+  
+  def adjustShields(s)
+    [@nShields,s.length].min
   end
  
 =begin
@@ -39,7 +43,10 @@ class Damage
       return "\nnShields: #{@nShields}"
   end
 
- #private_class_method :new
+  def hasNoEffect
+    @nShields == 0
+  end
+ private_class_method :new
   
 end
 

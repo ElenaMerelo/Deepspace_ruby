@@ -4,7 +4,7 @@ module Deepspace
 class Loot
   attr_reader :nSupplies, :nWeapons, :nShields, :nHangars, :nMedals, :spaceCity, :efficient
   
-  def initialize(nSupplies, nWeapons, nShields, nHangars,nMedals, ef, city)
+  def initialize(nSupplies, nWeapons, nShields, nHangars,nMedals, ef=false, city=false)
     @nSupplies = nSupplies
     @nWeapons = nWeapons
     @nShields = nShields
@@ -12,10 +12,6 @@ class Loot
     @nMedals = nMedals   
     @spaceCity = city
     @efficient = ef
-  end
-  
-  def self.newL(nSupplies, nWeapons, nShields, nHangars,nMedals)
-    new(nSupplies, nWeapons, nShields, nHangars,nMedals, false, false)
   end
   
    def to_s

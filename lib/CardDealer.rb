@@ -62,6 +62,7 @@ class CardDealer
     end
     
     def createSuppliesPackages() 
+=begin
         @suppliesPackages.add(SuppliesPackage.new(1,10,1))
         @suppliesPackages.add(SuppliesPackage.new(1,10,1))
         @suppliesPackages.add(SuppliesPackage.new(1,10,1))
@@ -74,11 +75,14 @@ class CardDealer
         @suppliesPackages.add(SuppliesPackage.new(1,0,3))
         @suppliesPackages.add(SuppliesPackage.new(3,50,3))  
         @suppliesPackages.add(SuppliesPackage.new(40,100,40))
+=end
         @suppliesPackages.add(SuppliesPackage.new(100,100,100))
+
     end
     
     def createWeapons() 
        @weapons.add(Weapon.new("Láser infinito",WeaponType::LASER,100))
+=begin
        @weapons.add(Weapon.new("Láser ACME",WeaponType::LASER,1))
        @weapons.add(Weapon.new("Láser ACME",WeaponType::LASER,1))
        @weapons.add(Weapon.new("Láser ACME",WeaponType::LASER,1))
@@ -103,12 +107,14 @@ class CardDealer
        @weapons.add(Weapon.new("Cañón ACME",WeaponType::PLASMA,1)) 
        @weapons.add(Weapon.new("Cañón ACME",WeaponType::PLASMA,1)) 
        @weapons.add(Weapon.new("Cañón mejorado",WeaponType::PLASMA,2))       
-       
+=end      
     end
     
     def createShieldBoosters() 
-       @shieldBoosters.add(ShieldBooster.new("El escudo infinito",2.0,100))
+      # @shieldBoosters.add(ShieldBooster.new("El escudo infinito",2.0,100))
+
        @shieldBoosters.add(ShieldBooster.new("El escudo definitivo",10.0,2))
+=begin
        @shieldBoosters.add(ShieldBooster.new("Escudo ACME",1.5,2))
        @shieldBoosters.add(ShieldBooster.new("Escudo ACME",1.5,2))
        @shieldBoosters.add(ShieldBooster.new("Escudo ACME",1.5,2))
@@ -118,10 +124,12 @@ class CardDealer
        @shieldBoosters.add(ShieldBooster.new("Escudo ACME",1.5,2))
        @shieldBoosters.add(ShieldBooster.new("Escudo normal",3.0,2))
        @shieldBoosters.add(ShieldBooster.new("Escudo normal",4.0,2))
+=end
     end
                                
     def createHangars() 
         @hangars.add(Hangar.new(4))
+=begin
         @hangars.add(Hangar.new(4))
         @hangars.add(Hangar.new(3))
         @hangars.add(Hangar.new(3))
@@ -130,16 +138,19 @@ class CardDealer
         @hangars.add(Hangar.new(2))
         @hangars.add(Hangar.new(1))
         @hangars.add(Hangar.new(1))
+=end
     end
     
     def createEnemies() 
-        regularLoot0=Loot.newL(1,2,1,1,1)
-        regularLoot1=Loot.newL(1,1,2,1,1)
-        badLoot=Loot.newL(1,1,1,0,1)
-        goodLoot=Loot.newL(2,2,2,1,2)
-        
+=begin
+        regularLoot0=Loot.new(1,2,1,1,1)
+        regularLoot1=Loot.new(1,1,2,1,1)
+        badLoot=Loot.new(1,1,1,0,1)
+        goodLoot=Loot.new(2,2,2,1,2)
+=end       
         regularDamage0=NumericDamage.new(2,1) 
         regularDamage1=NumericDamage.new(1,1) 
+=begin
         lowDamage0=NumericDamage.new(1,1)
         lowDamage1=NumericDamage.new(0,1)
         lowDamage2=NumericDamage.new(1,0)
@@ -181,14 +192,14 @@ class CardDealer
         @enemies.add(EnemyStarShip.new("Enemigo difícil 1",100,200,goodLoot,hardSpecificDamage0));   
         
         @enemies.add(EnemyStarShip.new("Enemigo imposible",500,500,goodLoot,hardSpecificDamage0));   
-        
+=end        
         # Enemigos que transforman
         
         transformLoot0=Loot.new(1,1,1,0,1,true,false)
         transformLoot1=Loot.new(1,1,1,0,1,false,true)
         
-        @enemies.add(EnemyStarShip.new("Enemigo transforma 0",200,100,transformLoot0,regularDamage0))
-        @enemies.add(EnemyStarShip.new("Enemigo transforma 1",100,200,transformLoot1,regularDamage1))
+        @enemies.add(EnemyStarShip.new("Enemigo transforma 0",2,1,transformLoot0,regularDamage0))
+        @enemies.add(EnemyStarShip.new("Enemigo transforma 1",1,2,transformLoot1,regularDamage1))
     end
 end # class
 

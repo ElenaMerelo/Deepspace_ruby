@@ -8,9 +8,10 @@ require_relative "SpaceStation"
 module Deepspace
 class PowerEfficientSpaceStation < SpaceStation
   
-  def initialize(station)
+  def initialize(s)
     @@EFFICIENCYFACTOR = 1.1
-    newCopy(station)
+    super(s.name, s.ammoPower, s.fuelUnits, s.shieldPower, s.hangar, s.weapons,s.shieldBoosters, \
+    s.pendingDamage,s.nMedals)
   end
   
   def fire
@@ -23,7 +24,7 @@ class PowerEfficientSpaceStation < SpaceStation
   
   def setLoot(loot)
     super(loot)
-    return Transformation::NOTRASNFORM
+    return Transformation::NOTRANSFORM
   end
  
 end

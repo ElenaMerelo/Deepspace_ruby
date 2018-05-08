@@ -10,7 +10,7 @@ module Deepspace
 class BetaPowerEfficientSpaceStation < PowerEfficientSpaceStation
   @@EXTRAEFFICIENCY = 1.2
   def initialize(station)
-    newCopy(station)   
+    super(station)   
     @dice = Dice.new
   end
   
