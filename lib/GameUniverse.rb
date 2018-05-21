@@ -187,7 +187,9 @@ class GameUniverse
   
   def createSpaceCity
     if (!@haveSpaceCity)
-      @currentStation = SpaceCity.new(@currentStation, @spaceStations)
+      aux = Array.new(@spaceStations)
+      aux.delete_at(@currentStationIndex)
+      @currentStation = SpaceCity.new(@currentStation, aux)
       @spaceStations[@currentStationIndex] = @currentStation
     end
   end
